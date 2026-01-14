@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <!-- Open Graph / Facebook / WhatsApp -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.alchemyofsystems.sk/">
+<meta property="og:title" content="AI Automation for Ecommerce">
+<meta property="og:description" content="Systémy, ktoré eshopom znižujú náklady, šetria čas a zvyšujú tržby.">
+<meta property="og:image" content="https://www.alchemyofsystems.sk/images/og-image.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://www.alchemyofsystems.sk/">
+<meta property="twitter:title" content="AI Automation for Ecommerce">
+<meta property="twitter:description" content="Systémy, ktoré eshopom znižujú náklady, šetria čas a zvyšujú tržby.">
+<meta property="twitter:image" content="https://www.alchemyofsystems.sk/images/og-image.png">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alchemy of Systems | Digitálna Renesancia</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@200;300;400&family=JetBrains+Mono:wght@200;300;400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind & Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+   <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Cormorant Garamond', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        paper: '#FDFCF8',
+                        ink: '#1C1917',
+                        sepia: '#78350F',
+                        stone: '#E7E5E4',
+                        rust: '#9A3412',
+                        brandRed: '#882121',
+                        mutedGrey: '#94A3B8'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1.2s ease-out forwards',
+                        'arrow-bounce': 'arrowBounce 2s infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        arrowBounce: {
+                            '0%, 100%': { transform: 'translateY(0)', opacity: '0.3' },
+                            '50%': { transform: 'translateY(8px)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { 
+            background-color: #FDFCF8; 
+            color: #1C1917; 
+        }
+
+        .grid-overlay {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(28, 25, 23, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(28, 25, 23, 0.03) 1px, transparent 1px);
+            mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+        }
+        
+        /* Glowing scroll indicator */
+.scroll-indicator {
+    position: absolute;
+    left: -7px;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    background: rgba(136, 33, 33, 0.8);
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.scroll-indicator.active {
+    opacity: 1;
+}
+
+/* Make sure parent has position relative */
+.story-section {
+    position: relative;
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #E7E5E4;
+    padding: 6px;
+    border-radius: 20px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.3s ease;
+}
+
+.dark-mode-toggle.dark {
+    background: #4a4a48;
+}
+
+.toggle-icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+.toggle-icon.active {
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Comprehensive Dark Mode */
+body.dark-mode {
+    background-color: #1e1e1b;
+    color: #E7E5E4;
+}
+
+/* All paragraph text white in dark mode */
+body.dark-mode p,
+body.dark-mode .text-ink {
+    color: #E7E5E4 !important;
+}
+
+/* Brighter red for text only */
+body.dark-mode .text-brandRed {
+    color: #ffa192 !important;
+}
+
+/* Keep button backgrounds original red */
+body.dark-mode .bg-brandRed {
+    background-color: #882121 !important;
+}
+
+/* Neutral text colors */
+body.dark-mode .text-neutral-600,
+body.dark-mode .text-neutral-700 {
+    color: #a8a8a8 !important;
+}
+
+body.dark-mode .text-neutral-400,
+body.dark-mode .text-neutral-500 {
+    color: #8a8a8a !important;
+}
+
+body.dark-mode .text-neutral-300 {
+    color: #c0c0c0 !important;
+}
+
+body.dark-mode .text-neutral-800 {
+    color: #E7E5E4 !important;
+}
+
+/* Before boxes - more subtle in dark mode */
+body.dark-mode .bg-neutral-50,
+body.dark-mode .bg-neutral-100 {
+    background-color: #202020 !important;
+    border-color: #3a3a37 !important;
+}
+
+/* After boxes - more prominent in dark mode */
+body.dark-mode .bg-brandRed\/\[0\.06\] {
+    background-color: rgba(255, 161, 146, 0.05) !important;
+}
+
+body.dark-mode .border-brandRed\/5,
+body.dark-mode .border-brandRed\/20 {
+    border-color: rgba(255, 161, 146, 0.3) !important;
+}
+
+/* Math/formula block */
+body.dark-mode .bg-stone\/40 {
+    background-color: rgba(42, 42, 39, 0.6) !important;
+}
+
+body.dark-mode .border-neutral-200,
+body.dark-mode .border-stone\/70 {
+    border-color: #3a3a37 !important;
+}
+
+/* Dark audit box */
+body.dark-mode .bg-ink {
+    background-color: #1c1918 !important;
+}
+
+body.dark-mode .text-stone\/80,
+body.dark-mode .text-stone\/60 {
+    color: #c0c0c0 !important;
+}
+
+/* Leonardo da Vinci quote */
+body.dark-mode cite {
+    color: #E7E5E4 !important;
+}
+
+body.dark-mode blockquote {
+    color: #E7E5E4 !important;
+}
+
+/* Remove footer top border in dark mode */
+body.dark-mode footer {
+    border-top: none !important;
+}
+
+/* Don't touch the particle sphere */
+body.dark-mode #canvas-container {
+    filter: none !important;
+}
+
+/* Headers stay white */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+    color: #E7E5E4 !important;
+}
+
+/* Make "PRED ALCHYMIOU" labels less prominent */
+body.dark-mode .text-neutral-600.tracking-widest {
+    color: #6a6a68 !important;
+}
+
+/* Make "PO ALCHYMII" labels more prominent */
+body.dark-mode .text-brandRed.tracking-widest {
+    color: #ffa192 !important;
+    font-weight: 600 !important;
+}
+
+        /* Standardized Typography Styles based on "Digitalna Renesancia" section */
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 3rem; /* 48px equivalent to text-5xl */
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        
+        h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 2rem; /* 32px */
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+        p, .section-p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem; /* text-sm */
+            color: #1C1917; /* text-ink */
+            line-height: 1.625;
+            max-width: 75ch;
+        }
+
+        .hero-clip {
+            position: relative;
+            overflow: hidden;
+            min-height: 90vh;
+        }
+
+        #canvas-container {
+            pointer-events: none;
+        }
+
+        #canvas-container canvas {
+            display: block;
+        }
+
+        ::selection { background: #E7E5E4; color: #1C1917; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* High-end smooth expansion */
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.8s cubic-bezier(0.6, 1, 0.36, 1), opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            opacity: 0;
+            position: relative;
+        }
+
+        .expandable-content::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(to top, rgba(136, 33, 33, 0.03), transparent);
+            opacity: 0;
+            transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            pointer-events: none;
+        }
+
+        .interactive-block:hover .expandable-content {
+            max-height: 400px;
+            opacity: 1;
+        }
+
+        .interactive-block:hover .expandable-content::before {
+            opacity: 1;
+        }
+
+        .interactive-block {
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .interactive-block:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -15px rgba(136, 33, 33, 0.08);
+            border-color: rgba(136, 33, 33, 0.2);
+        }
+
+        /* SCROLL ANIMATIONS - Extracted from second website */
+        .animate-on-scroll {
+            opacity: 0.01;
+            filter: blur(10px);
+            transform: translateY(20px);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .animate-on-scroll.in-view {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateY(0);
+        }
+
+        /* Stagger delays for children */
+        .animate-on-scroll[data-delay="100"] { transition-delay: 100ms; }
+        .animate-on-scroll[data-delay="200"] { transition-delay: 200ms; }
+        .animate-on-scroll[data-delay="300"] { transition-delay: 300ms; }
+        .animate-on-scroll[data-delay="400"] { transition-delay: 400ms; }
+        .animate-on-scroll[data-delay="500"] { transition-delay: 500ms; }
+        .animate-on-scroll[data-delay="600"] { transition-delay: 600ms; }
+    </style>
+</head>
+
+<body class="antialiased font-sans bg-paper overflow-x-hidden">
+
+    <!-- Hero Wrapper (Limits Canvas to Hero Only) -->
+    <div class="hero-clip w-full">
+        <!-- Subtle Grid Background -->
+        <div class="absolute inset-0 pointer-events-none grid-overlay z-0"></div>
+
+        <!-- Canvas (Local to Hero Only) -->
+        <div id="canvas-container" class="absolute inset-0 z-1 opacity-40 md:opacity-100"></div>
+
+        <div class="relative z-20 w-full">
+            <!-- Header -->
+            <header class="flex justify-between items-start p-6 md:p-12 opacity-0 animate-fade-in" style="animation-delay: 0.1s;">
+                <div class="flex flex-col gap-1">
+                    <div class="flex items-center gap-3">
+                        <span class="font-serif text-xl tracking-tight text-ink font-medium">Alchemy of Systems</span>
+                    </div>
+                </div>
+
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="https://alchemyofsystems.sk/blog" class="font-mono text-[12px] text-neutral-400 hover:text-ink transition-colors uppercase tracking-widest">Blog</a>
+                    <a href="https://www.youtube.com/@alchemyofsystems" class="font-mono text-[12px] text-neutral-400 hover:text-ink transition-colors uppercase tracking-widest">Youtube</a>
+                   <a href="#architektura" class="font-mono text-[12px] text-neutral-400 hover:text-ink transition-colors uppercase tracking-widest">Audit</a>
+                   
+<!-- Dark Mode Toggle -->
+<div class="dark-mode-toggle" onclick="toggleDarkMode()">
+    <div class="toggle-icon sun-icon active" id="sun-icon">
+        <i data-lucide="sun" class="w-3 h-3 text-neutral-600"></i>
+    </div>
+    <div class="toggle-icon moon-icon" id="moon-icon">
+        <i data-lucide="moon" class="w-3 h-3 text-neutral-400"></i>
+    </div>
+</div>
+                </nav>
+            </header>
+
+            <!-- Hero Content -->
+            <section class="px-6 md:px-12 flex flex-col justify-start pt-48 md:pt-60 pb-2">
+    <div class="w-full max-w-5xl md:ml-2 lg:ml-12">
+                    <div class="flex items-center gap-2 mb-4 opacity-60 animate-fade-in opacity-0" style="animation-delay: 0.1s;">
+                        <div class="h-px w-6 bg-rust"></div>
+                        <span class="font-mono text-[8px] text-rust uppercase tracking-[0.4em]">Automated Intelligence</span>
+                    </div>
+                    
+                    <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mix-blend-multiply mb-12 animate-fade-in opacity-0" style="animation-delay: 0.3s;">
+                        <span class="text-neutral-500 font-medium">Systémy, ktoré eshopom</span><br>
+                        <span class="text-ink font-medium">znižujú náklady, šetria čas</span><br>
+                        <span class="text-ink font-medium">a zvyšujú tržby.</span>
+                        <span class="italic font-light text-neutral-400 whitespace-nowrap">Bez pridaného chaosu.</span>
+                    </h1>
+
+                    <div class="flex items-center gap-4 animate-fade-in opacity-0" style="animation-delay: 0.5s;">
+                        <button onclick="document.getElementById('architektura').scrollIntoView({behavior: 'smooth'})" class="group flex items-center gap-4 bg-brandRed text-paper px-8 py-4 rounded-sm hover:bg-ink transition-all duration-1500 shadow-xl shadow-brandRed/10">
+                            <span class="font-mono text-[13px] tracking-widest uppercase font-medium">Rezervovať Audit</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                        <div class="h-px w-12 bg-neutral-200"></div>
+                        <span class="font-serif italic text-neutral-300 text-sm">v.4.0</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="relative z-20">
+        <!-- Narrative Sections -->
+        <section class="px-6 md:px-24 lg:px-32 xl:px-32 py-24 space-y-32 max-w-5xl mx-auto">
+            
+            <!-- Digitalna Renesancia -->
+            <div class="max-w-3xl animate-on-scroll">
+                <h2 class="font-serif font-semibold text-5xl md:text-5xl mb-6">
+                    <span class="text-ink">Digitálna</span> <span class="text-brandRed italic">Renesancia.</span>
+                </h2>
+                <p>
+                    Premyslené systémy, kde sa presnosť a technológia stretávajú s hlbokým porozumením biznisu, marketingu a ľudského správania.
+                </p>
+            </div>
+
+        <!-- Kvantifikacia Hodnoty -->
+<div id="kvant" class="max-w-3xl animate-on-scroll">
+    <h2 class="font-serif font-semibold text-5xl md:text-5xl mb-6">
+        <span class="text-brandRed">Kvantifikácia</span> <span class="text-ink">Hodnoty.</span>
+    </h2>
+    <p class="mt-10 animate-on-scroll" data-delay="200">
+        Rast nie je len to, čo pribudne. Je to aj to, čo <span class="font-bold text-brandRed">prestane unikať</span>.
+        Čas. Kapitál. Pozornosť. Tieto veličiny majú cenu — či ich meriate, alebo nie.
+    </p>
+    <p class="mt-10 animate-on-scroll" data-delay="200">
+        Nie vždy ide o viac. Ide o <span class="font-bold text-ink">presnejšie</span>.<br> 
+        Maximálny výsledok s <span class="text-brandRed">minimálnym trením</span>.<br>
+        Keď rovnaký výnos stojí menej času, menej peňazí a menej energie, nevyrástli ste. <span class="font-bold">Zefektívneli ste</span>.<br>
+        A práve vtedy sa rast stáva možným.
+    </p>
+    
+    <!-- Math Block -->
+    <div class="my-10 p-8 bg-stone/40 border border-stone/70 rounded-sm font-mono animate-on-scroll" data-delay="100">
+        <div class="text-xs text-rust/50 mb-4 uppercase tracking-widest">// ALCHEMY_FORMULA</div>
+        <div class="text-xl md:text-1xl text-ink">
+            HODNOTA = VÝSLEDOK ÷ <br class="md:hidden"> (ČAS + NÁKLADY + ÚSILIE)
+        </div>
+    </div>
+
+    <p class="animate-on-scroll" data-delay="200">Nesnažíme sa zlepšiť len Výsledok (Výnosy). <span class="font-bold text-brandRed">Útočíme na menovateľa</span>.</p>
+    <ul class="space-y-4 border-l-2 border-rust/40 pl-8 animate-on-scroll" data-delay="300">
+        <li class="mt-8"><span class="text-ink font-bold font-mono text-m">Čas:</span> <span class="font-mono text-m">Premena hodín a dní operatívy na minúty.</span></li>
+        <li><span class="text-ink font-bold font-mono text-m">Náklady:</span> <span class="font-mono text-m">Zníženie nákladov na akvizíciu, podporu a prevádzku.</span></li>
+        <li><span class="text-ink font-bold font-mono text-m">Úsilie:</span> <span class="font-mono text-m">Eliminácia manuálnej operatívy, ktorú má robiť technológia, nie ľudia.</span></li>
+    </ul>
+    
+    <!-- Comparison Card with Icons -->
+         <p class="mt-28 text-center animate-on-scroll" data-delay="500">
+        <span class="font-bold text-lg">Dva obchody robia 50 000 € mesačne.</span>
+    </p>
+    <div class="!mt-8 grid md:grid-cols-2 gap-4 animate-on-scroll" data-delay="400">
+        <div class="p-6 bg-neutral-100 border border-neutral-200 rounded-sm">
+            <div class="flex items-center gap-3 mb-3">
+                <i data-lucide="trending-down" class="w-5 h-5 text-neutral-500"></i>
+                <span class="font-mono text-xs uppercase tracking-widest font-bold">Na strope</span>
+            </div>
+            <p class="text-sm leading-relaxed text-neutral-700">
+                Prvý je preťažený, poddimenzovaný, závislý na ľuďoch.<br>
+            </p>
+        </div>
+        <div class="p-6 bg-brandRed/5 border border-brandRed/20 rounded-sm">
+            <div class="flex items-center gap-3 mb-3">
+                <i data-lucide="trending-up" class="w-5 h-5 text-brandRed"></i>
+                <span class="font-mono text-xs uppercase tracking-widest font-bold text-brandRed">Na začiatku</span>
+            </div>
+            <p class="text-sm leading-relaxed text-ink">
+                Druhý beží hladko, s rezervou, bez úzkych hrdiel.
+            </p>
+        </div>
+    </div>
+    
+    <p class="mt-6 text-center animate-on-scroll" data-delay="500">
+        <span class="text-neutral-600">Rozdiel nie je v ambícii.</span><br>
+        <span class="font-bold text-brandRed">Rozdiel je v architektúre systémov.</span>
+    </p>
+
+    <!-- NEW SECTION: Enterprise for SME -->
+    <div class="!mt-28 animate-on-scroll" data-delay="100">
+        <h3 class="font-serif font-semibold text-3xl md:text-4xl mb-5 text-ink">
+            Prečo giganti ako <span class="text-brandRed">GymBeam</span> alebo <span class="text-brandRed">Alza</span> dominujú?
+        </h3>
+        
+        <p class="mb-6 text-center animate-on-scroll" data-delay="200">Pretože spracujú 10 000 objednávok s rovnakým prevádzkovým úsilím<br> ako iní 100.</p>
+
+        <!-- Human vs AI Comparison -->
+        <div class="grid md:grid-cols-2 gap-6 mb-8 mt-8">
+            <div class="p-8 bg-neutral-50 border border-neutral-200 rounded-sm animate-on-scroll" data-delay="500">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-lucide="user" class="w-6 h-6 text-neutral-400"></i>
+                    <span class="font-mono text-sm uppercase tracking-widest text-neutral-500">Človek</span>
+                </div>
+                <div class="text-3xl font-serif font-bold text-ink mb-2">50</div>
+                <p class="text-sm text-neutral-600">tiketov denne</p>
+            </div>
+            <div class="p-8 bg-brandRed/5 border border-brandRed/20 rounded-sm animate-on-scroll" data-delay="600">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-lucide="cpu" class="w-6 h-6 text-brandRed"></i>
+                    <span class="font-mono text-sm uppercase tracking-widest text-brandRed">AI Agent</span>
+                </div>
+                <div class="text-3xl font-serif font-bold text-brandRed mb-2">5 000</div>
+                <p class="text-sm text-ink font-medium">konverzácií súčasne</p>
+            </div>
+        </div>
+
+       <!-- Final Statement -->
+<div class="p-8 rounded-sm text-center animate-on-scroll" data-delay="700">
+    <p class="text-2xl font-serif leading-relaxed mb-4 text-ink">
+        Prinášame <span class="text-brandRed font-bold">enterprise architektúru</span> malým a stredným e-shopom.
+    </p>
+    <div class="flex flex-wrap justify-center gap-6 text-sm font-mono text-ink">
+        <span class="flex items-center gap-2">
+            <i data-lucide="check" class="w-4 h-4 text-brandRed"></i>
+            Bez korporátneho chaosu
+        </span>
+        <span class="flex items-center gap-2">
+            <i data-lucide="check" class="w-4 h-4 text-brandRed"></i>
+            Bez straty kontroly
+        </span>
+        <span class="flex items-center gap-2">
+            <i data-lucide="check" class="w-4 h-4 text-brandRed"></i>
+            S presnosťou, ktorá škáluje
+        </span>
+    </div>
+</div>
+    </div>
+</div>
+            
+            
+            
+
+     <!-- Transmutacia Reality - RESTRUCTURED -->
+<div class="max-w-3xl mx-auto animate-on-scroll">
+    <h2 class="font-serif font-semibold text-5xl md:text-5xl mb-6">
+        <span class="text-ink">Transmutácia</span> <span class="text-brandRed italic">Reality.</span>
+    </h2>
+    <p class="animate-on-scroll mb-16" data-delay="100">
+        Dnes existujú dva spôsoby, ako riadiť e-commerce biznis. Jeden je starý: lineárny, ťažkopádny a závislý na ľudskej výdrži. Druhý je digitálna renesancia: ľahký, exponenciálny a poháňaný inteligentnými systémami.
+    </p>
+
+    <!-- Story-style vertical sections -->
+    <div class="space-y-24">
+        <!-- Topic 1 -->
+<div class="story-section space-y-1 border-l-2 border-brandRed/40 pl-8 animate-on-scroll">
+    <div class="scroll-indicator"></div>
+    <div class="flex items-baseline gap-4 mb-4 border-b border-neutral-200 pb-4">
+        <span class="font-mono text-brandRed text-4xl font-light">01</span>
+        <h3 class="font-serif text-3xl font-medium tracking-tight">Opustený košík</h3>
+    </div>
+        
+            <div class="space-y-6">
+                <div class="bg-neutral-50 p-6 rounded-sm animate-on-scroll" data-delay="100">
+                    <span class="font-mono text-[10px] uppercase text-neutral-400 tracking-widest block mb-2">Pred Alchýmiou</span>
+                    <p class="text-neutral-800 mb-2">Peter klikne na vašu reklamu. Má jednu rýchlu otázku ohľadom produktu, no váha. Vidí iba kontaktný e-mail a myslí si: „Kým odpíšu, prejdú dva dni... a volať sa mi nechce" a stránku zatvorí.</p>
+                    <p class="text-brandRed font-bold">Výsledok: Zaplatili ste za preklik, no stratili predaj. Toto sa stane 50-krát mesačne. Pri priemernej objednávke 30 € strácate 1 500 € každý mesiac.</p>
+                </div>
+                <div class="bg-brandRed/[0.06] border border-brandRed/5 p-6 rounded-sm animate-on-scroll" data-delay="200">
+                    <span class="font-mono text-[10px] uppercase text-brandRed tracking-widest block mb-2">Po Alchýmii</span>
+                    <p class="text-ink mb-2 font-medium">Peter príde na web. Okamžite mu vyskočí chat: „Môžem vám pomôcť s výberom veľkosti?" Žiadne „zadajte meno, email a napíšte otázku". Rovno konverzácia. Odpoveď dostane do 40 sekúnd. Agent zakončí: „Peter, keďže ste to vy – tu je 5% zľava, ak objednáte do hodiny."</p>
+                    <p class="text-brandRed font-bold">Výsledok: Peter okamžite kúpi a hovorí si: „O tomto shope musím povedať chalanom na tréningu."</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Topic 2 -->
+        <div class="story-section space-y-1 border-l-2 border-brandRed/40 pl-8 animate-on-scroll">
+    <div class="scroll-indicator"></div>
+    <div class="flex items-baseline gap-4 mb-4 border-b border-neutral-200 pb-4">
+        <span class="font-mono text-brandRed text-4xl font-light">02</span>
+        <h3 class="font-serif text-3xl font-medium tracking-tight">Starostlivosť o zákazníka</h3>
+    </div>
+            
+            <div class="space-y-8">
+                <div class="bg-neutral-50 p-6 rounded-sm animate-on-scroll" data-delay="100">
+                    <span class="font-mono text-[10px] uppercase text-neutral-400 tracking-widest block mb-2">Pred Alchýmiou</span>
+                    <p class="text-neutral-800">Po nákupe príde Petrovi automatický e-mail s potvrdením. O dva týždne ďalší suchý mail: „Ohodnoťte nás." Šanca, že ho otvorí? 30%. Šanca, že napíše recenziu? Takmer nulová.</p>
+                </div>
+                
+                <div class="bg-brandRed/[0.06] border border-brandRed/5 p-6 rounded-sm animate-on-scroll" data-delay="200">
+                    <span class="font-mono text-[10px] uppercase text-brandRed tracking-widest block mb-2">Po Alchýmii</span>
+                    <p class="text-ink mb-2">30 sekúnd po nákupe Petrovi zavibruje telefón. Potvrdenie objednávky na WhatsAppe od vášho AI Asistenta: „Ahoj Peter, vďaka za objednávku! Keby čokoľvek, som tu. Daj vedieť, keď tovar dorazí, ok?"</p>
+                    <p class="text-brandRed font-bold">Reakcia: „Wow. Podpora na WhatsAppe? To je iná úroveň."</p>
+                    <p class="text-ink mb-2">O 3 dni balík dorazí. AI Asistent píše: „Ako sedia topánky? Ak je všetko super, nechal by si nám rýchlu recenziu tu? [Link]. Zaberie to minútu."</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Topic 3 -->
+        <div class="space-y-1 border-l-2 border-brandRed/40 pl-8 animate-on-scroll">
+            <div class="flex items-baseline gap-4 mb-4 border-b border-neutral-200 pb-4">
+                <span class="font-mono text-brandRed text-4xl font-light">03</span>
+                <h3 class="font-serif text-3xl font-medium tracking-tight">Zákaznícka podpora</h3>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="bg-neutral-50 p-6 rounded-sm animate-on-scroll" data-delay="100">
+                    <span class="font-mono text-[10px] uppercase text-neutral-400 tracking-widest block mb-2">Pred Alchýmiou</span>
+                    <p class="text-neutral-800">Topánky nesedia. Peter hľadá e-mail na webe. Máte dvoch ľudí na podpore – jeden je chorý, druhý nestíha. Zamestnanec vidí Petrov e-mail, vzdychne si a odloží to na neskôr. Prejdú dva dni. Peter je frustrovaný. Keď mu konečne odpíšu (v strese), Peter už nechce výmenu – chce vrátiť peniaze. Už nikdy sa nevráti.</p>
+                </div>
+                <div class="bg-brandRed/[0.06] border border-brandRed/5 p-6 rounded-sm animate-on-scroll" data-delay="200">
+                    <span class="font-mono text-[10px] uppercase text-brandRed tracking-widest block mb-2">Po Alchýmii</span>
+                    <p class="text-ink mb-2">Peter píše svojmu „kamošovi", vášmu AI Agentovi na WhatsAppe. <br>Peter: „Čau, sú mi úzke." <br>Agent 5 sekúnd na to: „Jasné, poďme to vyriešiť. Potrebuješ o číslo väčšie?" Výmena vybavená za 2 minúty. Vášmu tímu len príde oznámenie.</p>
+                    <p class="text-brandRed font-bold">Reakcia: Peter nechápe. „Takýto servis som ešte nezažil." Vymení, nechá 5 hviezdičiek a o pol roka kúpi ďalší pár.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Topic 4 -->
+        <div class="space-y-1 border-l-2 border-brandRed/40 pl-8 animate-on-scroll">
+            <div class="flex items-baseline gap-4 mb-4 border-b border-neutral-200 pb-4">
+                <span class="font-mono text-brandRed text-4xl font-light">04</span>
+                <h3 class="font-serif text-3xl font-medium tracking-tight">Obsah pre reklamu a sociálne siete</h3>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="bg-neutral-50 p-6 rounded-sm animate-on-scroll" data-delay="100">
+                    <span class="font-mono text-[10px] uppercase text-neutral-400 tracking-widest block mb-2">Pred Alchýmiou</span>
+                    <p class="text-neutral-800">Vaše predaje stoja na reklamách, reklamy stoja na obsahu. Platíte agentúre 2 000 € mesačne. Prvý mesiac super, tretí mesiac hrôza. Komunikácia viazne, kreatíva sa opakuje, chyby z nepozornosti. Pozeráte na faktúru a pýtate sa: „Prečo platím toľko za takúto priemernú prácu?"</p>
+                </div>
+                <div class="bg-brandRed/[0.06] border border-brandRed/5 p-6 rounded-sm animate-on-scroll" data-delay="200">
+                    <span class="font-mono text-[10px] uppercase text-brandRed tracking-widest block mb-2">Po Alchýmii</span>
+                    <p class="text-ink mb-2">Máte automatizovaný systém. Vstup -> Mágia -> Výstup. Systém každú nedeľu ráno vygeneruje 20 nových kreatív (videá, fotky, text) priamo z vášho katalógu. Zamerané presne na vašu cieľovú skupinu. Vy si dáte kávu, vyberiete 10 najlepších a systém ich automaticky naplánuje.</p>
+                    <p class="text-brandRed font-bold">Pocit: Dopijete kávu, usmejete sa a pomyslíte si: „Neuveriteľné, že toto ma stojí len 800 € mesačne."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Transmutacia Reality section -->
+
+
+
+            <!-- Architektura Volby & Audit -->
+            <div class="max-w-3xl mx-auto animate-on-scroll" id="architektura">
+                <h2 class="font-serif font-semibold text-5xl md:text-5xl mb-6">
+                    <span class="text-brandRed">Architektúra</span> <span class="text-ink italic">Voľby.</span>
+                </h2>
+                <div class="font-mono text-sm text-neutral-600 space-y-8">
+                    <p class="text-ink max-w-3xl">Rozdiel medzi tým, či Peter nakúpi alebo odíde, nie je o šťastí. Nie je to o tvrdšej práci. Sú to systémy navrhnuté do posledného detailu, ktoré ticho rozhodujú za neho.</p>
+                    <p class="mb-20">Tento výsledok nenájdete v krabici na regáli. Ale cestu k nemu vieme presne naplánovať. <strong>Váš plán začína dnes.</strong></p>
+                    
+                    <div class="bg-ink text-paper p-8 md:p-14 rounded-sm space-y-12 animate-on-scroll mx-auto" data-delay="100">
+                        <div class="space-y-4">
+                            <h3 class="font-serif text-3xl md:text-4xl text-white">Je váš obchod pripravený na Alchýmiu?</h3>
+                            <p class="text-stone/80 font-mono text-sm leading-relaxed">Neveríme na predajné „pitche". Veríme v objektívnu diagnostiku založenú na dátach. Pekným slovám na webe veriť nemusíte, číslam áno.<br>Momentálne otvárame náš kalendár pre <span class="text-white">Systémový Audit.</span></p>
+                        </div>
+                        
+                        <!-- Step-by-step audit points -->
+                        <div class="space-y-8">
+                            <div class="flex gap-6 group">
+                                <div class="text-brandRed font-mono text-xl pt-1">01.</div>
+                                <div class="space-y-2">
+                                    <div class="text-brandRed uppercase tracking-widest font-bold">Mapovanie</div>
+                                    <div class="text-stone/60 text-xs">Urobíme röntgen vašich súčasných procesov (podpora, reklama, operatíva).</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-6 group">
+                                <div class="text-brandRed font-mono text-xl pt-1">02.</div>
+                                <div class="space-y-2">
+                                    <div class="text-brandRed uppercase tracking-widest font-bold">Odhalenie</div>
+                                    <div class="text-stone/60 text-xs">Náš dashboard presne ukáže, kde vo vašej firme uniká čas, kde stagnuje kapitál a kde sa zbytočne míňa ľudské úsilie.</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-6 group">
+                                <div class="text-brandRed font-mono text-xl pt-1">03.</div>
+                                <div class="space-y-2">
+                                    <div class="text-brandRed uppercase tracking-widest font-bold">Projekcia</div>
+                                    <div class="text-stone/60 text-xs">Vypočítame „Návratnosť Kompresie" – presnú sumu v eurách, ktorú získate premenou úzkych hrdiel na automatizované toky.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-10 border-t border-white/10 space-y-8">
+    <p class="text-stone/80 font-serif text-xl">
+        Spoluprácu nenavrhneme, ak neidentifikujeme potenciál na úsporu alebo rast aspoň 5 000 € – 10 000 € mesačne.
+    </p>
+
+    <div class="space-y-4">
+    <a href="https://cal.com/alchemyofsystems/audit" target="_blank" class="group flex items-center gap-4 bg-brandRed text-paper px-8 py-5 rounded-sm hover:bg-white hover:text-ink transition-all duration-500 w-full justify-center shadow-2xl">
+        <span class="font-mono text-[14px] tracking-widest uppercase font-bold">Rezervovať Audit</span>
+        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+    </a>
+    
+    <div class="text-center w-full">
+        <div class="text-brandRed font-bold text-lg">50 €</div>
+        <p class="text-[11px] text-stone/60 uppercase tracking-[0.2em] mt-2 mx-auto">Symbolická investícia za strategickú jasnosť, <br> ktorá vám môže ušetriť alebo zarobiť tisíce.</p>
+    </div>
+</div>
+
+<div class="text-center space-y-2 w-full">
+    <h4 class="text-white font-serif text-lg">Presnosť vyžaduje čas.</h4>
+    <p class="text-stone/60 text-[10px] uppercase tracking-widest leading-relaxed mx-auto">
+        Keďže tento audit vyžaduje plné sústredenie a námahu,<br> sme limitovaní na 5 diagnostík týždenne. Termíny sú otvorené vždy len na nasledujúcich 14 dní.
+    </p>
+</div>
+</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="max-w-3xl pt-12 space-y-16 animate-on-scroll">
+                <div class="flex flex-col md:flex-row gap-8 items-start">
+                    <span class="font-serif text-7xl text-brandRed leading-none">?</span>
+                    <div class="space-y-10">
+                        <!-- Question 1 -->
+                        <div class="interactive-block group border-b border-neutral-200 pb-6 animate-on-scroll" data-delay="100">
+                            <div class="flex justify-between items-center cursor-pointer gap-4">
+                                <div class="font-mono text-sm font-bold text-ink">Prečo je audit spoplatnený?</div>
+                                <i data-lucide="plus" class="w-4 h-4 text-brandRed transition-transform group-hover:rotate-45 flex-shrink-0"></i>
+                            </div>
+                            <div class="expandable-content">
+                                <div class="pt-4 font-mono text-sm text-neutral-600 tracking-tight leading-relaxed">
+                                    Aby sme filtrovali serióznych partnerov. Spolupracujeme len s majiteľmi, ktorí sa rozhodujú na základe dát, nie pocitov.
+                                    <br>Ak audit neodhalí merateľnú skrytú hodnotu vo vašom podnikaní, vrátime vám 100% investície.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 2 -->
+                        <div class="interactive-block group border-b border-neutral-200 pb-6 animate-on-scroll" data-delay="200">
+                            <div class="flex justify-between items-center cursor-pointer gap-4">
+                                <div class="font-mono text-sm font-bold text-ink">Mám len rýchlu otázku</div>
+                                <i data-lucide="plus" class="w-4 h-4 text-brandRed transition-transform group-hover:rotate-45 flex-shrink-0"></i>
+                            </div>
+                            <div class="expandable-content">
+                                <div class="pt-4 font-mono text-sm text-neutral-600 tracking-tight leading-relaxed">
+                                    Osobný kontakt na 
+                                    <a href="https://wa.me/421944564537" class="text-brandRed font-bold hover:underline">WhatsApp</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quote Block -->
+            <div class="pt-12 pb-10 text-center max-w-2xl mx-auto opacity-100 animate-on-scroll">
+                <blockquote class="font-serif italic text-2xl text-ink leading-relaxed mb-4">
+                    "To develop a complete mind: Study the science of art; Study the art of science. Learn how to see. Realize that everything connects to everything else."
+                </blockquote>
+                <cite class="font-mono text-[10px] uppercase tracking-[0.4em] text-neutral-800">— Leonardo da Vinci</cite>
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <footer class="px-6 md:px-12 py-12 border-t border-neutral-100 flex flex-col md:flex-row justify-between items-center gap-6 animate-on-scroll">
+            <div class="font-mono text-[10px] text-neutral-600 uppercase tracking-widest">
+                Copyright © 2026 Alchemy of Systems
+            </div>
+            <div class="flex items-center gap-8 font-mono text-[10px] uppercase tracking-widest">
+                <a href="https://www.linkedin.com/in/michalsestak/" class="hover:text-brandRed transition-colors">LinkedIn</a>
+                <span class="text-neutral-200">|</span>
+                <span class="text-neutral-600">Web development: Alchemy of Systems</span>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+// Dark Mode Toggle
+function toggleDarkMode() {
+    const body = document.body;
+    const toggle = document.querySelector('.dark-mode-toggle');
+    const moonIcon = document.getElementById('moon-icon');
+    const sunIcon = document.getElementById('sun-icon');
+    
+    body.classList.toggle('dark-mode');
+    toggle.classList.toggle('dark');
+    
+   if (body.classList.contains('dark-mode')) {
+    // Dark mode ON
+    sunIcon.classList.remove('active');
+    moonIcon.classList.add('active');
+    localStorage.setItem('darkMode', 'enabled');
+} else {
+    // Light mode ON
+    sunIcon.classList.add('active');
+    moonIcon.classList.remove('active');
+    localStorage.setItem('darkMode', 'disabled');
+}
+    
+    // Refresh lucide icons
+    lucide.createIcons();
+}
+
+// Check for saved dark mode preference
+document.addEventListener('DOMContentLoaded', function() {
+    const darkMode = localStorage.getItem('darkMode');
+    if (darkMode === 'enabled') {
+        toggleDarkMode();
+    }
+});
+
+        // SCROLL ANIMATION SYSTEM - Extracted from second website
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Initialize scroll animations when DOM is ready
+        document.addEventListener('DOMContentLoaded', handleScrollAnimations);
+        
+
+        // THREE.JS CANVAS CODE - Wrapped in DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('canvas-container');
+            if (!container) {
+                console.error('Canvas container not found');
+                return;
+            }
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0xFDFCF8, 0.035);
+        const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(0, 0, 18);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        const systemsGroup = new THREE.Group();
+        scene.add(systemsGroup);
+
+        const geometry = new THREE.IcosahedronGeometry(4.5, 30);
+        const uniforms = {
+            uTime: { value: 0 },
+            uDistortion: { value: 0.6 },
+            uSize: { value: 2.5 },
+            uColor: { value: new THREE.Color('#882121') },
+            uOpacity: { value: 0.8 },
+            uMouse: { value: new THREE.Vector2(0, 0) }
+        };
+
+        const vertexShader = document.getElementById('vertexShader').textContent;
+        const fragmentShader = document.getElementById('fragmentShader').textContent;
+
+        const material = new THREE.ShaderMaterial({
+            vertexShader: vertexShader,
+            fragmentShader: fragmentShader,
+            uniforms: uniforms,
+            transparent: true,
+            depthWrite: false,
+            blending: THREE.NormalBlending
+        });
+
+        const particles = new THREE.Points(geometry, material);
+        systemsGroup.add(particles);
+
+        const lineGroup = new THREE.Group();
+        systemsGroup.add(lineGroup);
+
+        function createThinOrbit(radius, rotation) {
+            const curve = new THREE.EllipseCurve(0, 0, radius, radius, 0, 2 * Math.PI, false, 0);
+            const points = curve.getPoints(128);
+            const geo = new THREE.BufferGeometry().setFromPoints(points);
+            const mat = new THREE.LineBasicMaterial({ color: 0x78350F, transparent: true, opacity: 0.15 });
+            const orbit = new THREE.Line(geo, mat);
+            orbit.rotation.x = rotation.x;
+            orbit.rotation.y = rotation.y;
+            lineGroup.add(orbit);
+            return orbit;
+        }
+
+        const orbits = [
+            createThinOrbit(5.5, {x: Math.PI/2, y: 0}),
+            createThinOrbit(5.2, {x: Math.PI/3, y: Math.PI/6}),
+            createThinOrbit(6.0, {x: Math.PI/1.8, y: Math.PI/4})
+        ];
+
+        let time = 0;
+        let targetMouseX = 0, targetMouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
+            targetMouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            adjustLayout();
+        });
+
+        function adjustLayout() {
+            const w = window.innerWidth;
+            if(w < 768) {
+                systemsGroup.position.set(0, 0, -5);
+                systemsGroup.scale.set(0.6, 0.6, 0.6);
+            } else if (w < 1024) {
+                systemsGroup.position.set(2.0, 0, 0);
+                systemsGroup.scale.set(0.8, 0.8, 0.8);
+            } else {
+                systemsGroup.position.set(4.5, 0, 0);
+                systemsGroup.scale.set(1, 1, 1);
+            }
+        }
+        adjustLayout();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            time += 0.01;
+            uniforms.uDistortion.value = Math.sin(time * 0.8) + 0.7;
+            systemsGroup.rotation.y = time * 0.05;
+            systemsGroup.rotation.z = Math.sin(time * 0.1) * 0.05;
+            lineGroup.rotation.x = Math.sin(time * 0.05) * 0.2;
+            orbits.forEach((orbit, i) => { orbit.rotation.z += 0.002 * (i + 1); });
+
+            const lerpFactor = 0.03;
+            uniforms.uMouse.value.x += (targetMouseX - uniforms.uMouse.value.x) * lerpFactor;
+            uniforms.uMouse.value.y += (targetMouseY - uniforms.uMouse.value.y) * lerpFactor;
+            camera.position.x += (uniforms.uMouse.value.x * 0.5 - camera.position.x) * 0.05;
+            camera.position.y += (uniforms.uMouse.value.y * 0.5 - camera.position.y) * 0.05;
+            camera.lookAt(0,0,0);
+            uniforms.uTime.value = time;
+            renderer.render(scene, camera);
+        }
+        animate();
+        }); // End DOMContentLoaded for Three.js
+    </script>
+
+    <!-- Shaders -->
+    <script type="x-shader/x-vertex" id="vertexShader">
+        uniform float uTime;
+        uniform float uDistortion; 
+        uniform float uSize;       
+        uniform vec2 uMouse;
+        varying float vNoise;
+
+        vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+        vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+        vec4 permute(vec4 x) { return mod289(((x*34.0)+1.0)*x); }
+        vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
+        
+        float snoise(vec3 v) {
+            const vec2  C = vec2(1.0/6.0, 1.0/3.0) ;
+            const vec4  D = vec4(0.0, 0.5, 1.0, 2.0);
+            vec3 i  = floor(v + dot(v, C.yyy) );
+            vec3 x0 = v - i + dot(i, C.xxx) ;
+            vec3 g = step(x0.yzx, x0.xyz);
+            vec3 l = 1.0 - g;
+            vec3 i1 = min( g.xyz, l.zxy );
+            vec3 i2 = max( g.xyz, l.zxy );
+            vec3 x1 = x0 - i1 + 1.0 * C.xxx;
+            vec3 x2 = x0 - i2 + 2.0 * C.xxx;
+            vec3 x3 = x0 - 1.0 + 3.0 * C.xxx;
+            i = mod289(i);
+            vec4 p = permute( permute( permute(
+                        i.z + vec4(0.0, i1.z, i2.z, 1.0 ))
+                    + i.y + vec4(0.0, i1.y, i2.y, 1.0 ))
+                    + i.x + vec4(0.0, i1.x, i2.x, 1.0 ));
+            float n_ = 1.0/7.0;
+            vec3  ns = n_ * D.wyz - D.xzx;
+            vec4 j = p - 49.0 * floor(p * ns.z *ns.z);
+            vec4 x_ = floor(j * ns.z);
+            vec4 y_ = floor(j - 7.0 * x_ );
+            vec4 x = x_ *ns.x + ns.yyyy;
+            vec4 y = y_ *ns.x + ns.yyyy;
+            vec4 h = 1.0 - abs(x) - abs(y);
+            vec4 b0 = vec4( x.xy, y.xy );
+            vec4 b1 = vec4( x.zw, y.zw );
+            vec4 s0 = floor(b0)*2.0 + 1.0;
+            vec4 s1 = floor(b1)*2.0 + 1.0;
+            vec4 sh = -step(h, vec4(0.0));
+            vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy ;
+            vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww ;
+            vec3 p0 = vec3(a0.xy,h.x);
+            vec3 p1 = vec3(a0.zw,h.y);
+            vec3 p2 = vec3(a1.xy,h.z);
+            vec3 p3 = vec3(a1.zw,h.w);
+            vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2, p2), dot(p3,p3)));
+            p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+            vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
+            m = m * m;
+            return 42.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3) ) );
+        }
+
+        void main() {
+            vec3 pos = position;
+            float noise = snoise(vec3(pos.x * 0.5 + uTime * 0.1, pos.y * 0.5, pos.z * 0.5));
+            vNoise = noise;
+            vec3 newPos = pos + (normalize(pos) * noise * uDistortion);
+            float dist = distance(uMouse * 10.0, newPos.xy);
+            float interaction = smoothstep(5.0, 0.0, dist);
+            newPos += normalize(pos) * interaction * 0.5;
+            vec4 mvPosition = modelViewMatrix * vec4(newPos, 1.0);
+            gl_Position = projectionMatrix * mvPosition;
+            gl_PointSize = uSize * (24.0 / -mvPosition.z) * (1.0 + noise * 0.5);
+        }
+    </script>
+
+    <script type="x-shader/x-fragment" id="fragmentShader">
+        uniform vec3 uColor;
+        uniform float uOpacity;
+        varying float vNoise;
+        void main() {
+            vec2 center = gl_PointCoord - vec2(0.5);
+            float dist = length(center);
+            if (dist > 0.5) discard;
+            float alpha = smoothstep(0.5, 0.2, dist) * uOpacity;
+            vec3 darkColor = uColor * 0.5;
+            vec3 lightColor = uColor * 1.8;
+            vec3 finalColor = mix(darkColor, lightColor, vNoise * 0.5 + 0.5);
+            gl_FragColor = vec4(finalColor, alpha);
+        }
+    </script>
+</body>
+</html>
